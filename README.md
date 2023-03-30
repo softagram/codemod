@@ -17,6 +17,11 @@ Example: Let's say you're deprecating your use of the `<font>` tag.  From the co
     codemod -m -d /home/jrosenstein/www --extensions php,html \
         '<font *color="?(.*?)"?>(.*?)</font>' \
         '<span style="color: \1;">\2</span>'
+        
+How to upgrade Microsoft.* NuGet packages from 6.0.14 to 6.0.15:
+
+    codemod -m -d . --extensions csproj 'Microsoft.(.*)" Version="6.0.14"' 'Microsoft.\1" Version="6.0.15"'
+
 
 For each match of the regex, you'll be shown a colored diff, and asked if you want to accept the change (the replacement of the `<font>` tag with a `<span>` tag), reject it, or edit the line in question in your `$EDITOR` of choice.
 
@@ -101,7 +106,9 @@ It's one of those tools where, the more you use it, the more you think of places
 Dependencies
 ------------
 
-* python2
+* python3
+* Linux or Ubuntu
+  - For Windows users there is an issue related to not being able to import *fcntl* module.
 
 Credits
 -------
